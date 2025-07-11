@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>高機能！席替えアプリ 説明書</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* ページ内リンクのスムーズスクロール */
+    html {
+      scroll-behavior: smooth;
+    }
+    /* 見出しのアンカーリンクを見やすくする */
+    h2, h3 {
+      scroll-margin-top: 2rem;
+    }
+  </style>
+</head>
+<body class="bg-gray-100 text-gray-800 font-sans">
+
+  <div class="container mx-auto px-4 py-8 md:py-12">
+    
+    <header class="text-center mb-12">
+      <h1 class="text-4xl md:text-5xl font-bold text-indigo-700">高機能！席替えアプリ</h1>
+      <p class="mt-4 text-lg text-gray-600">使い方説明書</p>
+    </header>
+
+    <!-- 目次 -->
+    <nav class="bg-white rounded-lg shadow-lg p-6 mb-12">
+      <h2 class="text-2xl font-bold mb-4 border-b pb-2">もくじ</h2>
+      <ul class="space-y-2 list-disc list-inside">
+        <li><a href="#setup" class="text-blue-600 hover:underline">【準備編】 アプリを自分のGoogleアカウントで使えるようにしよう</a></li>
+        <li><a href="#basic-usage" class="text-blue-600 hover:underline">【基本操作編】 さっそく席替えをしてみよう！</a></li>
+        <li><a href="#advanced-features" class="text-blue-600 hover:underline">【便利機能編】 もっと使いこなそう！</a></li>
+      </ul>
+    </nav>
+
+    <!-- 準備編 -->
+    <section id="setup" class="bg-white rounded-lg shadow-lg p-6 md:p-8 mb-12">
+      <h2 class="text-3xl font-bold text-indigo-800 mb-6">1. 【準備編】 アプリを自分のGoogleアカウントで使えるようにしよう</h2>
+      <p class="mb-6">まずは、アプリの元となるスプレッドシートをコピーして、あなた専用のアプリとして使えるように準備します。この作業は<strong>最初の一回だけ</strong>でOKです。</p>
+
+      <div class="space-y-8">
+        <div>
+          <h3 class="text-2xl font-semibold mb-4">STEP 1: テンプレートをコピーする</h3>
+          <p class="mb-4">配布された<strong>テンプレートのリンク</strong>をクリックすると、次のような画面が表示されます。右上の青い <strong>[コピーを作成]</strong> ボタンを押してください。</p>
+          <img src="https://storage.googleapis.com/gemini-prod/images/05508a8a-e55d-4f05-8e7c-d9c08497a61d.png" alt="スプレッドシートのコピー画面" class="w-full max-w-2xl mx-auto rounded-lg shadow-md border">
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-semibold mb-4">STEP 2: アプリを「デプロイ（公開）」する</h3>
+          <p class="mb-4">次に、コピーした設計図から、実際にインターネット上で動くアプリを「<strong>デプロイ</strong>」という作業で作り出します。</p>
+          <ol class="list-decimal list-inside space-y-6">
+            <li>コピーしたスプレッドシートの上部メニューから <strong>[拡張機能]</strong> > <strong>[Apps Script]</strong> を選択します。
+              <img src="https://storage.googleapis.com/gemini-prod/images/15a31a9e-87fd-4d57-b4d4-72fd54ab4f18.png" alt="Apps Scriptを開くメニュー" class="mt-2 w-full max-w-lg mx-auto rounded-lg shadow-md border">
+            </li>
+            <li>コードが書かれた画面が開きます。右上の青い <strong>[デプロイ]</strong> ボタンを押し、<strong>[新しいデプロイ]</strong> を選択します。
+              <img src="https://storage.googleapis.com/gemini-prod/images/c2ab5c9c-b170-4f53-8339-ff6541bc8293.png" alt="新しいデプロイボタン" class="mt-2 w-full max-w-2xl mx-auto rounded-lg shadow-md border">
+            </li>
+            <li>「種類の選択」の横にある<strong>歯車アイコン⚙</strong>をクリックし、<strong>[ウェブアプリ]</strong> を選択します。
+              <img src="https://storage.googleapis.com/gemini-prod/images/474d2698-c6f3-4e8c-85a0-975d05063073.png" alt="ウェブアプリを選択するUI" class="mt-2 w-full max-w-xl mx-auto rounded-lg shadow-md border">
+            </li>
+            <li><strong>「アクセスできるユーザー」</strong> の項目を <strong>[全員]</strong> に変更し、青い <strong>[デプロイ]</strong> ボタンを押します。
+              <img src="https://storage.googleapis.com/gemini-prod/images/4207904d-e6b7-4c7b-b5d3-827d095904fa.png" alt="アクセス権限を全員に設定" class="mt-2 w-full max-w-xl mx-auto rounded-lg shadow-md border">
+            </li>
+            <li>「承認が必要です」という画面が表示されたら、<strong>[アクセスを承認]</strong> ボタンを押します。
+              <img src="https://storage.googleapis.com/gemini-prod/images/8470a80c-7201-4475-a083-d9657b855232.png" alt="アクセス承認のダイアログ" class="mt-2 w-full max-w-md mx-auto rounded-lg shadow-md border">
+            </li>
+             <li>自分のGoogleアカウントを選択し、警告画面が表示されたら、左下の <strong>[詳細]</strong> をクリックし、<strong>「（安全でないページ）に移動」</strong> をクリックして許可します。（※これは自作のプログラムを動かす際に必ず表示されるメッセージです。ご安心ください。）
+              <img src="https://storage.googleapis.com/gemini-prod/images/223b5d38-9571-419b-a010-85f26ca4a3f4.png" alt="Googleの許可プロセス" class="mt-2 w-full max-w-md mx-auto rounded-lg shadow-md border">
+            </li>
+          </ol>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-semibold mb-4">STEP 3: アプリのURLをブックマークする</h3>
+          <p class="mb-4">デプロイが完了すると、あなた専用の<strong>ウェブアプリのURL</strong>が表示されます。このURLが、あなたの席替えアプリの入り口です。<strong>[コピー]</strong> ボタンを押してURLをコピーし、ブラウザの<strong>ブックマーク（お気に入り）に登録</strong>しておきましょう！</p>
+          <img src="https://storage.googleapis.com/gemini-prod/images/7926b2dd-319a-4712-87ad-a6ddf609e99a.png" alt="ウェブアプリのURL" class="w-full max-w-2xl mx-auto rounded-lg shadow-md border">
+        </div>
+      </div>
+    </section>
+
+    <!-- 基本操作編 -->
+    <section id="basic-usage" class="bg-white rounded-lg shadow-lg p-6 md:p-8 mb-12">
+      <h2 class="text-3xl font-bold text-indigo-800 mb-6">2. 【基本操作編】 さっそく席替えをしてみよう！</h2>
+      <p class="mb-6">ブックマークしたURLを開くと、いよいよ席替えアプリが使えます。</p>
+      
+      <div class="space-y-8">
+        <div>
+          <h3 class="text-2xl font-semibold mb-4">STEP 1: 生徒の名簿を準備する</h3>
+          <p class="mb-4">生徒のリストをアプリに読み込ませます。方法は3つあります。</p>
+          <ul class="list-disc list-inside mb-4 pl-4 space-y-1">
+            <li><strong>手で入力する:</strong> 左側の「生徒の名前」欄に入力し、[追加] ボタンを押します。</li>
+            <li><strong>スプレッドシートから読み込む:</strong> [シートから読込] ボタンを押します。あなたのスプレッドシートに自動で作成された「名簿」シートから名前を読み込みます。</li>
+            <li><strong>CSVファイルから読み込む:</strong> [CSVインポート] ボタンを押します。フォーマットが分からない場合は、隣の [サンプルCSV] をダウンロードして参考にしてください。</li>
+          </ul>
+          <img src="https://storage.googleapis.com/gemini-prod/images/e77aa5a0-1282-4f05-832f-767850021c3b.png" alt="名簿の準備エリア" class="w-full max-w-lg mx-auto rounded-lg shadow-md border">
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-semibold mb-4">STEP 2: 座席を配置する</h3>
+          <p class="mb-4">教室のレイアウトに合わせて座席を作ります。</p>
+           <ul class="list-disc list-inside mb-4 pl-4 space-y-1">
+            <li><strong>1つずつ追加:</strong> [座席を追加] ボタンで追加できます。</li>
+            <li><strong>まとめて追加:</strong> [複数追加] の横の数字を入れてボタンを押すと、一気に追加できます。</li>
+            <li><strong>自動で並べる:</strong> [配置] ボタンを押すと、座席がきれいに整列します。</li>
+            <li><strong>手で動かす:</strong> 座席はマウスでつかんで（ドラッグ＆ドロップ）、好きな場所に動かせます。</li>
+          </ul>
+          <img src="https://storage.googleapis.com/gemini-prod/images/22c070f8-c0b9-4c31-97b4-dd74b77f9998.png" alt="座席の配置エリア" class="w-full max-w-3xl mx-auto rounded-lg shadow-md border">
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-semibold mb-4">STEP 3: 「席替え実行」ボタンを押す！</h3>
+          <p class="mb-4">準備ができたら、<strong>[席替え実行]</strong> ボタンを押すだけ！アプリが自動で生徒を座席に割り振ってくれます。</p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-semibold mb-4">STEP 4: 結果をスプレッドシートに出力する</h3>
+          <p class="mb-4">席替え結果に満足したら、<strong>[シートに出力]</strong> ボタンを押してください。スプレッドシートにタイムスタンプ付きの新しいシートが作成され、レイアウトがそのまま出力されます。印刷や共有に便利です！</p>
+          <img src="https://storage.googleapis.com/gemini-prod/images/8a6491e8-cc50-482a-a92c-8822365a6f23.png" alt="シートに出力された結果" class="w-full max-w-3xl mx-auto rounded-lg shadow-md border">
+        </div>
+      </div>
+    </section>
+
+    <!-- 便利機能編 -->
+    <section id="advanced-features" class="bg-white rounded-lg shadow-lg p-6 md:p-8 mb-12">
+       <h2 class="text-3xl font-bold text-indigo-800 mb-6">3. 【便利機能編】 もっと使いこなそう！</h2>
+      
+      <div class="space-y-8">
+        <div>
+          <h3 class="text-2xl font-semibold mb-4">隣に座らせたくない生徒を指定する（隣席制約）</h3>
+          <p class="mb-4">「この2人は近くにしたくない…」という場合に設定します。左側の「隣席制約」で生徒を2人選び、<strong>[制約を追加]</strong> ボタンを押します。「席替え実行」時に、この2人が隣同士になることはありません。</p>
+          <img src="https://storage.googleapis.com/gemini-prod/images/548e6457-3a1b-4560-ad6a-4933a0cc30e6.png" alt="隣席制約の設定" class="w-full max-w-lg mx-auto rounded-lg shadow-md border">
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-semibold mb-4">席替えで動かしたくない生徒を固定する（座席ロック）</h3>
+          <p class="mb-4">「この生徒は一番前の席から動かしたくない」という場合に便利です。生徒が座っている座席の左上にある<strong>鍵のアイコン🔓</strong>をクリックすると、アイコンが<strong>🔒</strong>に変わり、座席の枠が紫色になります。この状態で「席替え実行」をしても、ロックされた座席の生徒は移動しません。</p>
+          <img src="https://storage.googleapis.com/gemini-prod/images/3d7f9d85-d8ce-41b2-a4f6-8217e4f9b88c.png" alt="座席のロック機能" class="w-full max-w-3xl mx-auto rounded-lg shadow-md border">
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-semibold mb-4">今の状態を保存・読み込みする</h3>
+          <p class="mb-4">生徒リスト、座席の配置、制約、ロック状態など、<strong>今の状態をすべて</strong>あなたのパソコンに保存できます。<strong>[保存]</strong> ボタンを押してファイルを保存し、後日 <strong>[読み込み]</strong> ボタンでそのファイルを選べば、いつでも状態を復元できます。</p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-semibold mb-4">座席のサイズを調整する</h3>
+          <p class="mb-4">座席の数が多いときなどに、表示サイズを変更できます。</p>
+           <ul class="list-disc list-inside mb-4 pl-4 space-y-1">
+            <li><strong>自動調整（デフォルト）:</strong> [自動サイズ調整] にチェックが入っていると、座席数に応じて見やすいサイズに自動で調整してくれます。</li>
+            <li><strong>手動調整:</strong> チェックを外すと、スライダーや数値入力で好きなサイズに変更できます。</li>
+          </ul>
+          <img src="https://storage.googleapis.com/gemini-prod/images/56434444-a957-41fe-8b2b-5582f3473f32.png" alt="座席サイズの調整UI" class="w-full max-w-xl mx-auto rounded-lg shadow-md border">
+        </div>
+      </div>
+    </section>
+
+    <footer class="text-center text-gray-500 pt-8">
+      <p>Copyright © 2025 Maeta Masaaki</p>
+      <p class="text-sm mt-1">This software is released under the MIT License. 改変は自由ですが、本ソフトウェアの使用によって生じた問題については、作者は一切の責任を負いません。</p>
+    </footer>
+
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,131 @@
+<!--
+  Copyright (c) 2025 Maeta Masaaki
+
+  This software is released under the MIT License.
+  http://opensource.org/licenses/mit-license.php
+
+  本ソフトウェアは、MITライセンスの下で提供されています。
+  改変は自由ですが、本ソフトウェアの使用によって生じた問題については、
+  作者は一切の責任を負いません。
+-->
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>席替えアプリ</title>
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+  
+  <?!= include('style'); ?>
+
+</head>
+<body class="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen">
+  
+  <div class="container mx-auto px-4 py-8">
+    <h1 class="text-3xl font-bold text-center text-indigo-800 mb-8">席替えアプリ</h1>
+    
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <div class="bg-white rounded-lg shadow-lg p-6 col-span-1">
+        <h2 class="text-xl font-semibold text-indigo-700 mb-4">生徒リスト</h2>
+        
+        <div class="mb-4">
+          <div class="flex">
+            <input type="text" id="studentName" placeholder="生徒の名前" class="flex-1 border border-gray-300 rounded-l px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+            <button id="addStudent" class="bg-indigo-600 text-white px-4 py-2 rounded-r hover:bg-indigo-700 transition">追加</button>
+          </div>
+          <div class="mt-2">
+            <button id="importStudents" class="bg-gray-200 text-gray-700 px-3 py-1 rounded text-sm hover:bg-gray-300 transition">CSVインポート</button>
+            <button id="loadFromSheet" class="bg-blue-200 text-blue-800 px-3 py-1 rounded text-sm hover:bg-blue-300 transition ml-2">シートから読込</button>
+            <button id="downloadSampleCSV" class="bg-green-200 text-green-800 px-3 py-1 rounded text-sm hover:bg-green-300 transition ml-2">サンプルCSV</button>
+            <input type="file" id="csvFile" accept=".csv" class="hidden">
+          </div>
+        </div>
+        
+        <div id="studentList" class="mb-6 min-h-[100px] max-h-[200px] overflow-y-auto border border-gray-200 rounded p-2"></div>
+        
+        <h2 class="text-xl font-semibold text-indigo-700 mb-4">隣席制約</h2>
+        <div class="mb-4">
+          <select id="student1" class="border border-gray-300 rounded px-3 py-2 w-full mb-2"><option value="">生徒1を選択</option></select>
+          <select id="student2" class="border border-gray-300 rounded px-3 py-2 w-full"><option value="">生徒2を選択</option></select>
+          <button id="addRestriction" class="mt-2 bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition w-full">制約を追加</button>
+        </div>
+        
+        <div id="restrictionList" class="mb-6 min-h-[100px] max-h-[200px] overflow-y-auto border border-gray-200 rounded p-2"></div>
+        
+        <div class="mt-6 border-t pt-4">
+          <h2 class="text-xl font-semibold text-indigo-700 mb-4">データ保存/読み込み</h2>
+          <div class="flex space-x-2 mb-2">
+            <button id="saveData" class="flex-1 bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition">保存</button>
+            <button id="loadData" class="flex-1 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition">読み込み</button>
+          </div>
+          <input type="file" id="loadFile" accept=".json" class="hidden">
+        </div>
+      </div>
+      
+      <div class="bg-white rounded-lg shadow-lg p-6 col-span-1 lg:col-span-2">
+        <h2 class="text-xl font-semibold text-indigo-700 mb-4">座席レイアウト</h2>
+
+        <div class="flex items-center space-x-4 mb-4 p-2 bg-gray-100 rounded-md">
+          <div class="flex items-center">
+            <input type="checkbox" id="autoSizeToggle" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500" checked>
+            <label for="autoSizeToggle" class="ml-2 text-sm font-medium text-gray-900">自動サイズ調整</label>
+          </div>
+          <div id="manualSizeControls" class="flex items-center space-x-2">
+            <input type="range" id="seatSizeSlider" min="50" max="150" value="100" class="w-24">
+            <input type="number" id="seatSizeValue" min="50" max="150" value="100" class="w-16 border border-gray-300 rounded px-2 py-1 text-center">
+            <span class="text-sm text-gray-600">%</span>
+          </div>
+        </div>
+        
+        <div class="flex mb-4 space-x-2 flex-wrap gap-2">
+          <button id="addSeat" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition">座席を追加</button>
+          <div class="flex">
+            <input type="number" id="seatCount" min="1" max="100" value="6" class="w-16 border border-gray-300 rounded-l px-2 py-2 focus:outline-none focus:ring-2 focus:ring-green-500">
+            <button id="addMultipleSeats" class="bg-green-700 text-white px-3 py-2 rounded-r hover:bg-green-800 transition">複数追加</button>
+          </div>
+          <div class="flex ml-2">
+            <select id="seatPattern" class="border border-gray-300 rounded-l px-2 py-2 focus:outline-none focus:ring-2 focus:ring-green-500">
+              <option value="grid">グリッド配置</option>
+              <option value="rows">横一列配置</option>
+              <option value="columns">縦一列配置</option>
+            </select>
+            <button id="arrangeSeatsByPattern" class="bg-green-700 text-white px-3 py-2 rounded-r hover:bg-green-800 transition">配置</button>
+          </div>
+          <button id="clearSeats" class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 transition">全座席削除</button>
+          <button id="generateSeating" class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition">席替え実行</button>
+          <button id="exportToSheetBtn" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition">シートに出力</button>
+        </div>
+        
+        <div id="seatingArea" class="relative border-2 border-dashed border-gray-300 rounded-lg h-[500px] bg-gray-50"></div>
+        
+        <div id="layoutInfo" class="mt-4 text-sm text-gray-600">
+          <p>クラス名: <input type="text" id="className" placeholder="例: 1年2組" class="border border-gray-300 rounded px-2 py-1"></p>
+          <p class="mt-2">日付: <input type="date" id="layoutDate" class="border border-gray-300 rounded px-2 py-1"></p>
+        </div>
+      </div>
+    </div>
+    
+    <div id="saveModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+      <div class="bg-white rounded-lg p-6 max-w-md w-full">
+        <h3 class="text-xl font-semibold mb-4">レイアウトを保存</h3>
+        <div class="mb-4">
+          <label class="block text-sm font-medium text-gray-700 mb-1">保存名</label>
+          <input type="text" id="saveName" placeholder="保存名を入力" class="w-full border border-gray-300 rounded px-3 py-2">
+        </div>
+        <div class="flex justify-end space-x-2">
+          <button id="cancelSave" class="bg-gray-300 text-gray-700 px-4 py-2 rounded hover:bg-gray-400 transition">キャンセル</button>
+          <button id="confirmSave" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition">保存</button>
+        </div>
+      </div>
+    </div>
+    
+    <a id="directDownloadLink" style="display: none;"></a>
+  </div>
+
+  <?!= include('javascript'); ?>
+  
+</body>
+</html>

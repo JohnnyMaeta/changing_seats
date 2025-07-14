@@ -95,6 +95,25 @@
             border-radius: 5px;
             box-shadow: 0 2px 5px rgba(0,0,0,0.05);
         }
+        /* シートコピーリンクのスタイルを追加 */
+        .sheet-link-container {
+            margin: 1.5em auto;
+            text-align: center;
+            padding: 1.2em;
+            background-color: #e6ffe6; /* 薄い緑色 */
+            border: 1px solid #8fcf8f;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        .sheet-link-container a {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #28a745; /* 強めの緑色 */
+            text-decoration: none;
+        }
+        .sheet-link-container a:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
@@ -109,6 +128,14 @@
                 <source src="voice/ChangeSeatsVoiceGuide.m4a" type="audio/mp4">
                 <p>お使いのブラウザは音声要素をサポートしていません。</p>
             </audio>
+        </div>
+
+        <div class="sheet-link-container">
+            <p><strong>ここから席替えアプリのテンプレートシートをコピーできます:</strong></p>
+            <a href="https://bit.ly/changing_seats" target="_blank" rel="noopener noreferrer">
+                席替えアプリ テンプレートシートをコピーする
+            </a>
+            <p style="font-size: 0.9em; color: #555; margin-top: 0.5em;">（クリックするとGoogleドライブにシートがコピーされます）</p>
         </div>
 
         <h2>もくじ</h2>
@@ -206,7 +233,7 @@
         <h3>STEP 3: 席替えを実行し、結果をスプレッドシートに出力する</h3>
         <ol>
             <li>名簿と座席の準備ができたら、青い <strong>[席替え実行]</strong> ボタンを押します。座席に生徒の名前が自動で割り振られます。</li>
-            <li>結果に満足したら、緑色の <strong>[シートに出力]</strong> ボタンを押します。</li>
+    サービス     <li>結果に満足したら、緑色の <strong>[シートに出力]</strong> ボタンを押します。</li>
             <li>「〜に出力しました！」というメッセージが出たら、あなたのGoogleスプレッドシートを開いて確認してください。新しいシートが追加され、レイアウトがそのままの形で出力されています。このシートは印刷や共有に便利です。</li>
         </ol>
 
@@ -226,13 +253,13 @@
             <li>座席の左上に表示されている<strong>鍵のアイコン🔓</strong>をクリックします。</li>
             <li>アイコンが<strong>閉じた鍵🔒</strong>に変わり、座席の枠が<strong>紫色</strong>になればロック完了です。</li>
             <li>この状態で「席替え実行」すると、ロックされた生徒はその場から動きません。解除するには、もう一度鍵のアイコンをクリックします。</li>
-        </ol>
+    サービス     </ol>
 
         <h3>機能3: 作成したレイアウトを保存・復元する（データ保存・読み込み）</h3>
         <p>生徒リスト、座席の配置、制約、ロック状態など、<strong>現在のすべての設定</strong>を一つのファイルとしてあなたのパソコンに保存できます。</p>
         <ul>
             <li><strong>保存する時：</strong> 左下の <strong>[保存]</strong> ボタンを押します。</li>
-            <li><strong>復元する時：</strong> <strong>[読み込み]</strong> ボタンを押し、以前保存したファイルを選択します。</li>
+      サービス     <li><strong>復元する時：</strong> <strong>[読み込み]</strong> ボタンを押し、以前保存したファイルを選択します。</li>
         </ul>
 
         <h3>機能4: 座席の表示サイズを調整する</h3>
@@ -244,7 +271,7 @@
         
         <div class="copyright">
             <p><strong>著作権表示 (Copyright)</strong></p>
-            <p>Copyright (c) 2025 Maeta Masaaki. This software is released under the MIT License.</p>
+    サービス     <p>Copyright (c) 2025 Maeta Masaaki. This software is released under the MIT License.</p>
             <p>改変は自由ですが、本ソフトウェアの使用によって生じた問題については、作者は一切の責任を負いません。</p>
         </div>
     </div>

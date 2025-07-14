@@ -86,7 +86,7 @@
         a:hover {
             text-decoration: underline;
         }
-        /* 音声プレーヤーのスタイルを追加 */
+        /* 音声プレーヤーのスタイル */
         .audio-container {
             margin: 1.5em auto;
             text-align: center;
@@ -95,7 +95,7 @@
             border-radius: 5px;
             box-shadow: 0 2px 5px rgba(0,0,0,0.05);
         }
-        /* シートコピーリンクのスタイルを追加 */
+        /* シートコピーリンクのスタイル */
         .sheet-link-container {
             margin: 1.5em auto;
             text-align: center;
@@ -113,6 +113,32 @@
         }
         .sheet-link-container a:hover {
             text-decoration: underline;
+        }
+        /* コードダウンロードリンクのスタイル */
+        .code-link-container {
+            margin: 2em auto;
+            text-align: center;
+            padding: 1.5em;
+            background-color: #e0f2f7; /* 薄い青色 */
+            border: 1px solid #6dd5ed;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.08);
+        }
+        .code-link-container a {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #007bff; /* 青色 */
+            text-decoration: none;
+            display: inline-block; /* ボタンのように見せるため */
+            padding: 0.8em 1.5em;
+            border: 2px solid #007bff;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        .code-link-container a:hover {
+            background-color: #007bff;
+            color: #fff;
+            text-decoration: none;
         }
     </style>
 </head>
@@ -233,7 +259,7 @@
         <h3>STEP 3: 席替えを実行し、結果をスプレッドシートに出力する</h3>
         <ol>
             <li>名簿と座席の準備ができたら、青い <strong>[席替え実行]</strong> ボタンを押します。座席に生徒の名前が自動で割り振られます。</li>
-    サービス     <li>結果に満足したら、緑色の <strong>[シートに出力]</strong> ボタンを押します。</li>
+            <li>結果に満足したら、緑色の <strong>[シートに出力]</strong> ボタンを押します。</li>
             <li>「〜に出力しました！」というメッセージが出たら、あなたのGoogleスプレッドシートを開いて確認してください。新しいシートが追加され、レイアウトがそのままの形で出力されています。このシートは印刷や共有に便利です。</li>
         </ol>
 
@@ -253,13 +279,13 @@
             <li>座席の左上に表示されている<strong>鍵のアイコン🔓</strong>をクリックします。</li>
             <li>アイコンが<strong>閉じた鍵🔒</strong>に変わり、座席の枠が<strong>紫色</strong>になればロック完了です。</li>
             <li>この状態で「席替え実行」すると、ロックされた生徒はその場から動きません。解除するには、もう一度鍵のアイコンをクリックします。</li>
-    サービス     </ol>
+        </ol>
 
         <h3>機能3: 作成したレイアウトを保存・復元する（データ保存・読み込み）</h3>
         <p>生徒リスト、座席の配置、制約、ロック状態など、<strong>現在のすべての設定</strong>を一つのファイルとしてあなたのパソコンに保存できます。</p>
         <ul>
             <li><strong>保存する時：</strong> 左下の <strong>[保存]</strong> ボタンを押します。</li>
-      サービス     <li><strong>復元する時：</strong> <strong>[読み込み]</strong> ボタンを押し、以前保存したファイルを選択します。</li>
+            <li><strong>復元する時：</strong> <strong>[読み込み]</strong> ボタンを押し、以前保存したファイルを選択します。</li>
         </ul>
 
         <h3>機能4: 座席の表示サイズを調整する</h3>
@@ -269,9 +295,17 @@
             <li><strong>手で調整：</strong> 「自動サイズ調整」のチェックを外すと、右側の<strong>スライダー</strong>や<strong>数字の入力欄</strong>が操作できるようになり、好きなサイズに変更できます。</li>
         </ul>
         
+        <div class="code-link-container">
+            <p><strong>このアプリのコードはGitHubで公開されています。自由にダウンロードして改変できます:</strong></p>
+            <a href="https://github.com/JohnnyMaeda/changing_seats/tree/main/code" target="_blank" rel="noopener noreferrer">
+                GitHubでコードをダウンロード・改変する
+            </a>
+            <p style="font-size: 0.9em; color: #555; margin-top: 0.8em;">（MITライセンスのもと、自由に利用可能です）</p>
+        </div>
+
         <div class="copyright">
             <p><strong>著作権表示 (Copyright)</strong></p>
-    サービス     <p>Copyright (c) 2025 Maeta Masaaki. This software is released under the MIT License.</p>
+            <p>Copyright (c) 2025 Maeta Masaaki. This software is released under the MIT License.</p>
             <p>改変は自由ですが、本ソフトウェアの使用によって生じた問題については、作者は一切の責任を負いません。</p>
         </div>
     </div>
